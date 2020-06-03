@@ -22,28 +22,28 @@ class NavBar extends React.Component {
                 <Link to='/' onClick={()=>this.updateSelected(0)}>
                     <div className={`navigation-item ${this.state.selected === 0 ? 'selected' : '' }`}>  
                         <p className='navigation-text'>  
-                            Page 1  
+                            How To
                         </p>  
                     </div> 
                 </Link>
                  <Link to='/page2' onClick={()=>this.updateSelected(1)}>
                     <div className={`navigation-item ${this.state.selected === 1 ? 'selected' : '' }`}>  
                         <p className='navigation-text'>  
-                            Page 2  
+                            Meals
                         </p>  
                     </div> 
                  </Link>
                  <Link to='/page3' onClick={()=>this.updateSelected(2)}>
                     <div className={`navigation-item ${this.state.selected === 2 ? 'selected' : '' }`}>  
                         <p className='navigation-text'>  
-                            Page 3  
+                            Page2 
                         </p>  
                     </div>  
                  </Link>
                  <Link to='/page4' onClick={()=>this.updateSelected(3)}>
                     <div className={`navigation-item ${this.state.selected === 3 ? 'selected' : '' }`}>  
                         <p className='navigation-text'>  
-                            Page 4  
+                            Page3
                         </p>  
                     </div>  
                  </Link>

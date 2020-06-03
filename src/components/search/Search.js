@@ -3,32 +3,32 @@ import React from 'react';
 
 class Search extends React.Component {
 
-    state = {weatherQuery:''};
+    state = {mealQuery:''};
 
-    updateWeatherQuery = event => {
-        this.setState({weatherQuery : event.target.value});
+    updateMealQuery = event => {
+        this.setState({mealQuery : event.target.value});
         console.log(event.target.value);
     }
 
     handleKeyPress = event => {
         if (event.key === 'Enter'){
-            this.searchWeather();
+            this.searchMeal();
         }
     }
 
-    searchWeather = () => {
-        this.props.searchWeather(this.state.weatherQuery);
+    searchMeal = () => {
+        this.props.searchMeal(this.state.mealQuery);
     }
 
     render(){
         return(
             <div>
-                <input onChange={this.updateWeatherQuery} 
+                <input onChange={this.updateMealQuery} 
                     onKeyPress={this.handleKeyPress}
-                    placeholder = 'Enter your location'
+                    placeholder = 'Search for a meal'
                  />
         
-                <button variant="outline-dark" onClick ={this.searchWeather}>Search</button>
+                <button variant="outline-dark" onClick ={this.searchMeal}>Search</button>
             </div>
         );
     }

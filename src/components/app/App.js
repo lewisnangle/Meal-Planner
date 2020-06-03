@@ -2,32 +2,34 @@ import * as React from 'react';
 import PageHeader from '../page-header/PageHeader';  
 import Navbar from '../navbar/NavBar';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'; 
-import WeatherList from '../weatherList/weatherList';
+import MealList from '../mealList/mealList';
+import MealGrid from '../mealGrid/MealGrid';
 
 class App extends React.Component {  
 
-    state = {weatherList:[],sources:[]};
+    state = {mealList:[]};
 
-    searchWeather = location => {
-        fetch('http://localhost:8080/weather?name='+location)
+    searchMeal = meal => {
+        fetch('https://www.themealdb.com/api/json/v1/1/search.php?s='+meal)
         .then(response => 
             response.json())
         .then((myJson) => {
-            var json = JSON.parse(myJson.content);
-            console.log(json.consolidated_weather);
-            var weatherList = []
-            var sources = [];
-            for(var i = 0; i < json.consolidated_weather.length;i++){
-                var id = json.consolidated_weather[i].id;
-                var weather_state_name = json.consolidated_weather[i].weather_state_name;
-                var wind_direction_compass = json.consolidated_weather[i].wind_direction_compass;
-                var the_temp = json.consolidated_weather[i].the_temp;
-                var wind_speed = json.consolidated_weather[i].wind_speed;
-                sources = json.sources;
-                var weatherItem = {id,weather_state_name,wind_direction_compass,the_temp,wind_speed,weatherItem}
-                weatherList.push(weatherItem)
+            console.log(myJson)
+            //var json = JSON.parse(myJson);
+            var json = myJson;
+            console.log(json.meals);
+            var mealList = []
+            for(var i = 0; i < json.meals.length;i++){
+                var id = json.meals[i].idMeal;
+                var strMeal = json.meals[i].strMeal;
+                var strCategory = json.meals[i].strCategory;
+                var strArea = json.meals[i].strArea;
+                var strInstructions = json.meals[i].strInstructions;
+                var strMealThumb = json.meals[i].strMealThumb;
+                var mealItem = {id,strMeal,strCategory,strArea,strInstructions,strMealThumb}
+                mealList.push(mealItem)
             }
-            this.setState({weatherList,sources})
+            this.setState({mealList})
         });
     }
 
@@ -35,12 +37,12 @@ class App extends React.Component {
         return (  
             <div>  
                 
-                <PageHeader searchWeather={this.searchWeather}/>
+                <PageHeader searchMeal={this.searchMeal}/>
                 <Router> 
                 <Navbar/>
                 <Switch>  
                     <Route path="/page2">  
-                        <div className='page-content'>Page 2</div>  
+                        <MealGrid mealList={this.state.mealList} className='page-content'/>
                     </Route>  
                     <Route path="/page3">  
                         <div className='page-content'>Page 3</div>  
@@ -49,7 +51,7 @@ class App extends React.Component {
                         <div className='page-content'>Page 4</div>  
                     </Route>  
                     <Route path="/">  
-                        <WeatherList searchWeather={this.searchWeather} weatherList = {this.state.weatherList} source = {this.state.sources}/>   
+                        <MealList searchMeal={this.searchMeal} mealList = {this.state.mealList} />   
                     </Route>  
                 </Switch>  
             </Router> 
