@@ -6,7 +6,12 @@ import GridListTileBar from '@material-ui/core/GridListTileBar';
 import ListSubheader from '@material-ui/core/ListSubheader';
 import IconButton from '@material-ui/core/IconButton';
 import InfoIcon from '@material-ui/icons/Info';
-//import tileData from './tileData';
+import Button from '@material-ui/core/Button'
+import Meal from '../Meal/Meal.js'
+import { Link } from 'react-router-dom'; 
+
+
+
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -33,17 +38,19 @@ export default function MealGrid(props) {
     if (props.mealList.length === 0){
       return null;
     } else {
-        console.log('props from above...',props);
+       // console.log('props from above...',props);
     }
     const tileData = props.mealList;
+
+
     
-    console.log("meal List in meal grid:" + JSON.stringify(tileData));
+  //  console.log("meal List in meal grid:" + JSON.stringify(tileData));
 
     return (
         <div className="page-content {classes.root}" >
       <GridList cellHeight={180} className={classes.gridList}>
         <GridListTile key="Subheader" cols={2} style={{ height: 'auto',width:'100%' }}>
-          <ListSubheader component="div">December</ListSubheader>
+          <ListSubheader component="div">Meals</ListSubheader>
         </GridListTile>
         {tileData.map((tile) => (
           <GridListTile key={tile.strMealThumb}>
@@ -52,9 +59,18 @@ export default function MealGrid(props) {
               title={tile.strMeal}
               subtitle={<span>by: {tile.strArea}</span>}
               actionIcon={
-                <IconButton aria-label={`info about ${tile.strMeal}`} className={classes.icon}>
-                  <InfoIcon />
-                </IconButton>
+                <Link to ={{
+                  pathname:'/meal',
+                  state:{meal:tile.strMeal}
+                          }}>
+
+                          
+                
+                  <Button aria-label={`info about ${tile.strMeal}`} variant="contained" color="primary">
+                    recipe
+                  </Button>
+                
+                </Link>
               }
             />
           </GridListTile>

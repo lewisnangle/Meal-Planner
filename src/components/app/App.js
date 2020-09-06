@@ -4,6 +4,8 @@ import Navbar from '../navbar/NavBar';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'; 
 import MealList from '../mealList/mealList';
 import MealGrid from '../mealGrid/MealGrid';
+import Meal from '../Meal/Meal';
+
 
 class App extends React.Component {  
 
@@ -17,7 +19,7 @@ class App extends React.Component {
             console.log(myJson)
             //var json = JSON.parse(myJson);
             var json = myJson;
-            console.log(json.meals);
+          //  console.log(json.meals);
             var mealList = []
             for(var i = 0; i < json.meals.length;i++){
                 var id = json.meals[i].idMeal;
@@ -33,6 +35,11 @@ class App extends React.Component {
         });
     }
 
+    componentDidMount(){
+        const foods = ["chicken","beef"];
+        this.searchMeal(foods[Math.floor(Math.random() * foods.length)]);//get random food item from foods
+    }
+
     render() {  
         return (  
             <div>  
@@ -42,7 +49,7 @@ class App extends React.Component {
                 <Navbar/>
                 <Switch>  
                     <Route path="/page2">  
-                        <MealGrid mealList={this.state.mealList} className='page-content'/>
+                        <MealList searchMeal={this.searchMeal} mealList = {this.state.mealList} />   
                     </Route>  
                     <Route path="/page3">  
                         <div className='page-content'>Page 3</div>  
@@ -50,14 +57,17 @@ class App extends React.Component {
                     <Route path="/page4">  
                         <div className='page-content'>Page 4</div>  
                     </Route>  
+                    <Route path="/meal">  
+                        <div className='page-content'><Meal className='page-content'></Meal></div>  
+                    </Route>  
                     <Route path="/">  
-                        <MealList searchMeal={this.searchMeal} mealList = {this.state.mealList} />   
+                        <MealGrid mealList={this.state.mealList} className='page-content'/>
                     </Route>  
                 </Switch>  
             </Router> 
             </div>  
         )  
-    }  
+    }   
 
 } 
 

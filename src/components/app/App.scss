@@ -3,8 +3,12 @@
 body { 
     margin: 0; 
     font-family: $font-family; 
+    background-color: $primary;
 }
 
 .page-content { 
   margin-left: $navbar-width; 
+  color: $secondary;
+  background-color: $primary;
+  
 }

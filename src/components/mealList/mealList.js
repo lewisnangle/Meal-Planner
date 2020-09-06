@@ -10,12 +10,12 @@ class mealList extends React.Component {
         if (this.props.mealList.length === 0){
             return null;
         } else {
-            console.log('this.props',this.props);
+          //  console.log('this.props',this.props);
         }
 
         const mealList = this.props.mealList;
 
-        console.log("meal List:" + mealList);
+      //  console.log("meal List:" + mealList);
 
         return(
             <div>
